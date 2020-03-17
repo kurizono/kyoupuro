@@ -1,0 +1,39 @@
+//第５回日本情報オリンピック本戦
+//B - JOI 2006 本選 問題2
+
+using System;
+using System.Collections.Generic;
+
+namespace kyoupuro
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string operate = Console.ReadLine();
+            int count = int.Parse(operate);
+            string input = Console.ReadLine();
+            string[] answer = new string[2] { "", input };
+            int numcount = 1; 
+
+            for (int i = 0; i < count; i++) {
+                answer[1] += "A";
+                answer[0] = answer[1];
+                answer[1] = "";
+                for (int j = 0; j < answer[0].Length - 1; j++) {
+                    if (answer[0].Substring(j, 1) == answer[0].Substring(j + 1, 1))
+                    {
+                        numcount++;
+                    }
+                    else 
+                    {
+                        answer[1] += numcount + answer[0].Substring(j, 1);
+                        numcount = 1;
+                    }
+                }
+            }
+
+            Console.WriteLine(answer[1]);
+        }
+    }
+}
