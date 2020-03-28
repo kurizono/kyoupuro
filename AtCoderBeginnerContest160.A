@@ -1,0 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+ 
+namespace ConsoleApp1
+{
+    class Program
+    {
+        public static void Main()
+        {
+            string S = Console.ReadLine();
+            string ans = "No";
+            if(S.Substring(2,1) == S.Substring(3,1) && S.Substring(4,1) == S.Substring(5,1)) {
+                ans = "Yes";
+            }
+            Console.WriteLine(ans);
+        }
+    }
+}
+ 
