@@ -1,0 +1,46 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+ 
+public class MainApp
+{
+ 
+	static public void Main()
+	{
+ 
+		int[] a = Arrayint();
+		int b = a[0];
+		a[0] = a[1];
+		a[1] = b;
+		b = a[0];
+		a[0] = a[2];
+		a[2] = b;
+ 
+ 
+		Console.WriteLine(a[0] + " " + a[1] + " " + a[2]);
+	
+ 
+	}
+ 
+ 
+	private static string[] Arraystring()
+	{
+		return Console.ReadLine().Split(' ');
+	}
+ 
+	private static string Onestring()
+	{
+		return Console.ReadLine();
+	}
+ 
+	private static int Oneint()
+	{
+		return int.Parse(Console.ReadLine());
+	}
+ 
+	private static int[] Arrayint()
+	{
+		return Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+	}
+}
