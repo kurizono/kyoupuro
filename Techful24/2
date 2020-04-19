@@ -1,0 +1,20 @@
+using System;
+
+class Program
+{
+    static public void Main()
+    {
+        int num = oneint();
+        int i = 0;
+        while(num < 4096)
+        {
+			num = num*2;
+            i++;
+        }
+        Console.WriteLine(i);
+    }
+	static int oneint()
+    {
+        return int.Parse(Console.ReadLine());
+    }
+}
