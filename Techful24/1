@@ -1,0 +1,23 @@
+using System;
+
+class Program
+{
+    static public void Main()
+    {
+        string[] key = arraystring();
+        char first = char.Parse(key[0]);
+        char second = char.Parse(key[1]);
+        for(int i = 0; i < 26; i++)
+        {
+            if(first == second + i || second == first + i)
+            {
+                Console.WriteLine(i);
+                break;
+            }
+        }
+    }
+	static string[] arraystring()
+    {
+        return Console.ReadLine().Split(' ');
+    }
+}
