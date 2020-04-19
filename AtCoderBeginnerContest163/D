@@ -2,12 +2,12 @@ using System;
 
 class Program
 {
-	static public void Main()
+    static public void Main()
     {
     	int[] NK = Arrayint();
  
         string ans = Team(NK[0] + 1, NK[1]);
-	   	long a = long.Parse(ans);
+	long a = long.Parse(ans);
        	long b = a%1000000007;
         Console.WriteLine(b);
     }
