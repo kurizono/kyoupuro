@@ -1,0 +1,83 @@
+using System;
+
+class Program
+{
+    static public void Main()
+    {
+        string S = Onestring();
+        int K = Oneint();
+        int leng = S.Length;
+        string[] moji = new string[leng];
+        for (int i = 0; i < leng; i++)
+        {
+            moji[i] = S.Substring(i, 1);
+        }
+        int result = 0;
+        int remain = K;
+        //最初のカウント
+        for (int i = 0; i < leng; i++)
+        {
+            if (moji[i] == "0")
+            {
+                if (remain == 0)
+                {
+                    i = leng;
+                    result--;
+                }
+                else
+                {
+                    remain--;
+                }
+            }
+            result++;
+        }
+        int ans = result;
+
+        for (int i = 1; i < leng - ans; i++)
+        {
+            //始点が一つ左に動くと    
+            if (moji[i - 1] == "0")
+            {
+                remain++;
+            }
+            result--;
+
+            while (remain >= 0 && i+result < leng)
+            {
+                if (moji[i + result] == "1")
+                {
+                    result++;
+                }
+                else
+                {
+                    if (remain == 0)
+                    {
+                        remain--;
+                    }
+                    else
+                    {
+                        result++;
+                        remain--;
+                    }
+                }
+            } 
+            remain = 0;
+
+             if (ans < result)
+            {
+                ans = result;
+            }
+        }
+        Console.WriteLine(ans);
+    }
+		
+	static string Onestring()
+    {
+        return Console.ReadLine();
+    }
+
+	static int Oneint()
+    {
+        return int.Parse(Console.ReadLine());
+    }	
+}
