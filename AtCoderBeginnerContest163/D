@@ -123,7 +123,7 @@ class Program
             }               
        }
         return tasustring;
-	}
+    }
  
     static int[] Array(string A)
     {
