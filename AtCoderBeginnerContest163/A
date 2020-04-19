@@ -1,0 +1,20 @@
+using System;
+namespace Csharponly
+{
+    class Program
+    {
+        static public void Main()
+        {
+ 
+            int R = Oneint();
+            double ans = Math.PI * R * 2;
+            Console.WriteLine(ans);
+        
+        }
+ 
+		    static int Oneint()
+        {
+            return int.Parse(Console.ReadLine());
+        }
+    }
+}
