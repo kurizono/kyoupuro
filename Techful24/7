@@ -1,0 +1,191 @@
+using System;
+
+class Program
+{
+    static public void Main()
+    {
+        int[] NM = Arrayint();
+        int[] A = Arrayint();
+        int[] B = Arrayint();
+
+        //それぞれの桁の数字
+        int[] aaa = new int[20];
+        aaa[0] = 1;
+        for (int i = 1; i < 20; i++)
+        {
+            aaa[i] = aaa[i - 1] * 2;
+        }
+
+        int[] a = new int[20];
+        int[] b = new int[20];
+        //それぞれの値の保持(k桁にある1の数と0の数(a[k])(NM[0]-a[k]))
+        for (int i = 0; i < NM[0]; i++)
+        {
+            int k = 0;
+            while (A[i] > 0)
+            {
+                a[k] += A[i] % 2;
+                A[i] = A[i] / 2;
+                k++;
+            }
+        }
+        for (int i = 0; i < NM[1]; i++)
+        {
+            int k = 0;
+            while (B[i] > 0)
+            {
+                b[k] += B[i] % 2;
+                B[i] = B[i] / 2;
+                k++;
+            }
+        }
+
+        string ans = "0";
+        //桁数が大きすぎる
+        for (int i = 0; i < 20; i++)
+        {
+            //ans += (a[i] * (NM[1] - b[i])) * aaa[i];
+            ans = Tasu(ans, Kakeru(Kakeru(a[i].ToString(),(NM[1] - b[i]).ToString())  ,aaa[i].ToString()));
+            //ans += ((NM[0] - a[i]) * b[i]) * aaa[i];
+            ans = Tasu(ans, Kakeru(Kakeru(b[i].ToString(),(NM[0] - a[i]).ToString())  ,aaa[i].ToString()));
+        }
+
+        int count = ans.Length;
+        for (int i = 0; i < count; i++)
+        {
+            if (ans.Substring(0,1) == "0" && ans.Length > 1)
+            {
+                ans = ans.Substring(1);
+            }
+            else
+            {
+                break;
+            }
+        }
+        Console.WriteLine(ans);
+    }
+
+    static string Kakeru(string a1, string b1)
+    {
+        int anum = a1.Length;
+        int bnum = b1.Length;
+        int[] a = Array(a1);
+                int[] b = Array(b1);
+
+        int[] kakeruans = new int[anum + bnum];
+        for(int i = 0; i < anum; i++)
+        {
+            for(int j = 0; j < bnum; j++)
+            {
+                kakeruans[i + j] += a[i] * b[j];
+            }
+        }
+        for(int i = 0; i < kakeruans.Length; i++)
+        {
+            if(kakeruans[i] >= 10)
+            {
+                kakeruans[i + 1] += kakeruans[i] / 10;
+                kakeruans[i] = kakeruans[i] % 10;
+            }
+        }
+        string kakerustring = "";
+        for (int i = 0; i < kakeruans.Length - 1; i++)
+        {
+            kakerustring = kakeruans[i].ToString() + kakerustring;
+        }
+        if (kakeruans[kakeruans.Length - 1] != 0)
+        {
+            kakerustring = kakeruans[kakeruans.Length - 1].ToString() + kakerustring;
+        }
+        return kakerustring;
+    }
+
+    static string Tasu(string a1, string b1)
+    {
+        int anum = a1.Length;
+        int bnum = b1.Length;
+        int[] a = Array(a1);
+        int[] b = Array(b1);
+
+        string tasustring = "";
+        if (anum < bnum)
+        {
+            int[] tasuans = new int[bnum + 1];
+            for (int i = 0; i < anum; i++)
+            {
+                tasuans[i] = a[i] + b[i];
+            }
+            for(int i = anum; i < bnum; i++)
+            {
+                tasuans[i] = b[i];
+            }
+            for(int i = 0; i < tasuans.Length; i++)
+            {
+                if(tasuans[i] >= 10)
+                {
+                    tasuans[i] -= 10;
+                    tasuans[i + 1]++; 
+                }
+            }
+            for (int i = 0; i < tasuans.Length - 1; i++)
+            {
+                tasustring = tasuans[i].ToString() + tasustring;
+            }
+            if(tasuans[tasuans.Length - 1] != 0)
+            {
+                tasustring = tasuans[tasuans.Length - 1].ToString() + tasustring;
+            }
+        }
+        else
+        {
+            int[] tasuans = new int[anum + 1];
+            for (int i = 0; i < bnum; i++)
+            {
+                tasuans[i] = a[i] + b[i];
+            }
+            for (int i = bnum; i < anum; i++)
+            {
+                tasuans[i] = a[i];
+            }
+            for (int i = 0; i < tasuans.Length; i++)
+            {
+                if (tasuans[i] >= 10)
+                {
+                    tasuans[i] -= 10;
+                    tasuans[i + 1]++;
+                }
+            }
+            for (int i = 0; i < tasuans.Length - 1 ; i++)
+            {
+                tasustring = tasuans[i].ToString() + tasustring;
+            }
+            if (tasuans[tasuans.Length - 1] != 0)
+            {
+                tasustring = tasuans[tasuans.Length - 1].ToString() + tasustring;
+            }               
+        }
+        return tasustring;
+    }
+
+    static int[] Array(string A)
+    {
+        int[] a = new int[A.Length];
+        string num;
+        for (int i = 0; i < A.Length; i++)
+        {
+            num = A.Substring(i, 1);
+            a[A.Length - i - 1] = int.Parse(num);
+        }
+        return a;
+    }
+	static int[] Arrayint()
+    {
+        String[] input_line = Console.ReadLine().Split(' ');
+        int[] input_num = new int[input_line.Length];
+        for (int i = 0; i < input_line.Length; i++)
+        {
+            input_num[i] = int.Parse(input_line[i]);
+        }
+        return input_num;
+    }
+}
