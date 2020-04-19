@@ -1,0 +1,46 @@
+using System;
+
+class Program
+{
+    static public void Main()
+    {
+        int N = oneint();
+        int money = 0;
+        for(int i = 0; i < N; i++)
+        {
+            int[] DM = arrayint();
+            switch (DM[0])
+            {
+                case 0:
+                    money += DM[1];
+                break;
+                case 1:
+                    if(money >= DM[1])
+                    {
+                        money -= DM[1];
+                    }
+                    else{
+						money = 0;
+					}
+                    break;
+            }
+        }
+
+        Console.WriteLine(money);
+    }
+	static int oneint()
+    {
+        return int.Parse(Console.ReadLine());
+    }
+
+    static int[] arrayint()
+    {
+        String[] input_line = Console.ReadLine().Split(' ');
+        int[] input_num = new int[input_line.Length];
+        for (int i = 0; i < input_line.Length; i++)
+        {
+            input_num[i] = int.Parse(input_line[i]);
+        }
+        return input_num;
+    }   
+}
