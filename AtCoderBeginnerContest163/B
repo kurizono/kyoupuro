@@ -1,0 +1,26 @@
+using System;
+using System.Linq;
+
+public class MainApp
+{
+	static public void Main()
+	{     
+            int[] NM = Arrayint();
+            int[] A = Arrayint();
+            for(int i = 0; i < NM[1]; i++)
+            {
+                NM[0] -= A[i]; 
+            }
+            if(NM[0] < 0)
+            {
+                NM[0] = -1;
+            }
+             
+            Console.WriteLine(NM[0]); 
+	}
+
+	private static int[] Arrayint()
+	{
+		return Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+	}
+}
