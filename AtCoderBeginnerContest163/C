@@ -1,0 +1,29 @@
+using System;
+using System.Linq;
+
+public class MainApp
+{ 
+	static public void Main()
+	{
+      		int N = Oneint();
+            int[] A = Arrayint();
+            int[] ans = new int[N];
+            for(int i = 0; i < N - 1; i++)
+            {
+                ans[A[i]-1]++;
+            }
+            for(int i = 0; i < N; i++)
+            {
+                Console.WriteLine(ans[i]);
+            }
+	}
+ 
+	private static int Oneint()
+	{
+		return int.Parse(Console.ReadLine());
+	} 
+	private static int[] Arrayint()
+	{
+		return Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+	}
+}
