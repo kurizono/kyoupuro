@@ -1,0 +1,129 @@
+using System;
+
+class Program
+{
+    static public void Main()
+    {
+    string[] S = Arraystring();
+
+        int[] a = Array(S[0]);
+        int[] b = Array(S[1]);
+		int anum = S[0].Length;
+        int bnum = S[1].Length;
+
+		string ans1 = Tasu(anum,bnum,a,b);
+		string ans2 = kakeru(anum,bnum,a,b);
+
+        Console.WriteLine(ans1);
+		Console.WriteLine(ans2);
+        }
+
+	static string kakeru(int anum, int bnum, int[] a, int[] b)
+    {
+        int[] kakeruans = new int[anum + bnum];
+        for(int i = 0; i < anum; i++)
+        {
+            for(int j = 0; j < bnum; j++)
+            {
+                kakeruans[i + j] += a[i] * b[j];
+            }
+        }
+        for(int i = 0; i < kakeruans.Length; i++)
+        {
+            if(kakeruans[i] >= 10)
+            {
+                kakeruans[i + 1] += kakeruans[i] / 10;
+                kakeruans[i] = kakeruans[i] % 10;
+           }
+        }
+        string kakerustring = "";
+        for (int i = 0; i < kakeruans.Length - 1; i++)
+        {
+            kakerustring = kakeruans[i].ToString() + kakerustring;
+        }
+        if (kakeruans[kakeruans.Length - 1] != 0)
+        {
+            kakerustring = kakeruans[kakeruans.Length - 1].ToString() + kakerustring;
+        }
+        return kakerustring;
+    }
+
+    static string Tasu(int anum, int bnum, int[] a , int[] b)
+    {
+        if(anum < bnum)
+        {
+            int[] tasuans = new int[bnum + 1];
+            for (int i = 0; i < anum; i++)
+            {
+                tasuans[i] = a[i] + b[i];
+            }
+            for(int i = anum; i < bnum; i++)
+            {
+                tasuans[i] = b[i];
+            }
+            for(int i = 0; i < tasuans.Length; i++)
+            {
+                if(tasuans[i] >= 10)
+                {
+                    tasuans[i] -= 10;
+                    tasuans[i + 1]++; 
+                }
+            }
+            string tasustring = "";
+            for (int i = 0; i < tasuans.Length - 1; i++)
+            {
+                tasustring = tasuans[i].ToString() + tasustring;
+            }
+            if(tasuans[tasuans.Length - 1] != 0)
+            {
+                tasustring = tasuans[tasuans.Length - 1].ToString() + tasustring;
+            }
+            return tasustring;
+        }
+        else
+        {
+            int[] tasuans = new int[anum + 1];
+            for (int i = 0; i < bnum; i++)
+            {
+                tasuans[i] = a[i] + b[i];
+            }
+            for (int i = bnum; i < anum; i++)
+            {
+                tasuans[i] = a[i];
+            }
+            for (int i = 0; i < tasuans.Length; i++)
+            {
+                if (tasuans[i] >= 10)
+                {
+                    tasuans[i] -= 10;
+                    tasuans[i + 1]++;
+                }
+            }
+            string tasustring = "";
+            for (int i = 0; i < tasuans.Length - 1 ; i++)
+            {
+                tasustring = tasuans[i].ToString() + tasustring;
+            }
+            if (tasuans[tasuans.Length - 1] != 0)
+            {
+                tasustring = tasuans[tasuans.Length - 1].ToString() + tasustring;
+            }
+            return tasustring;
+        }           
+    }
+    static int[] Array(string A)
+    {
+        int[] a = new int[A.Length];
+        string num;
+        for (int i = 0; i < A.Length; i++)
+        {
+            num = A.Substring(i, 1);
+            a[A.Length - i - 1] = int.Parse(num);
+        }
+         return a;
+    }
+    static string[] Arraystring()
+    {
+        return Console.ReadLine().Split(' ');
+    }
+}
